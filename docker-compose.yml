@@ -1,0 +1,44 @@
+services:
+  webMongo:
+    image: tomee:jre25-Semeru-ubuntu-plus
+    ports:
+      - "8088:8080"
+      - "5005:5005"
+    networks:
+      - app-network
+    volumes:
+      - ./target/TravelTogetherMongo-1.0-SNAPSHOT.war:/usr/local/tomee/webapps/travelTogether.war
+    environment:
+      # Actualizamos las variables para apuntar a MongoDB
+      - MONGO_HOST=dbTravelMongo
+      - MONGO_PORT=27017
+      - MONGO_DATABASE=traveltogether
+      - MONGO_USER=root
+      - MONGO_PASSWORD=admin
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+    depends_on:
+      - dbTravelMongo
+
+  dbTravelMongo:
+    image: mongo:latest
+    container_name: dbnosql
+    environment:
+      # Configuración de credenciales de root para MongoDB
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=admin
+      - MONGO_INITDB_DATABASE=traveltogether
+    ports:
+      - "27017:27017"
+    networks:
+      - app-network
+    volumes:
+      - dbTravelMongo_data:/data/db
+      # Cargar la base de datos y los datos de prueba de initMongo.js
+      - ./init-mongo.js:/docker-entrypoint-initdb.d/initMongo.js:ro
+
+volumes:
+  dbTravelMongo_data:
+
+networks:
+  app-network:
+    driver: bridge
