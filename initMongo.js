@@ -24,7 +24,6 @@ use('traveltogether');
 // 1. Colección de Usuarios
 db.Usuario.insertMany([
     {
-        "_id": 1,
         "alias": "carlos_picos",
         "nombre": "Carlos Rodríguez",
         "correo": "carlos.rodriguez@email.com",
@@ -33,7 +32,6 @@ db.Usuario.insertMany([
         "mascota": "compañia"
     },
     {
-        "_id": 2,
         "alias": "ana_rioja",
         "nombre": "Ana Martínez",
         "correo": "ana.mtz@email.com",
@@ -42,7 +40,6 @@ db.Usuario.insertMany([
         "mascota": "tolerante"
     },
     {
-        "_id": 3,
         "alias": "javi_montaña",
         "nombre": "Javier López",
         "correo": "javi.lpz@email.com",
@@ -51,7 +48,6 @@ db.Usuario.insertMany([
         "mascota": "intolerante"
     },
     {
-        "_id": 4,
         "alias": "marta_senderos",
         "nombre": "Marta Gómez",
         "correo": "marta.g@email.com",
@@ -60,7 +56,6 @@ db.Usuario.insertMany([
         "mascota": "compañia"
     },
     {
-        "_id": 5,
         "alias": "lucia_furgo",
         "nombre": "Lucía García",
         "correo": "lucia.garcia@email.com",
@@ -69,7 +64,6 @@ db.Usuario.insertMany([
         "mascota": "compañia"
     },
     {
-        "_id": 8,
         "alias": "pablo_camino",
         "nombre": "Pablo Herranz",
         "correo": "pablo.h@email.com",
@@ -78,7 +72,6 @@ db.Usuario.insertMany([
         "mascota": "null"
     },
     {
-        "_id": 10,
         "alias": "marcos_aneto",
         "nombre": "Marcos Soler",
         "correo": "marcos.soler@email.com",
@@ -87,7 +80,6 @@ db.Usuario.insertMany([
         "mascota": "intolerante"
     },
     {
-        "_id": 12,
         "alias": "sergio_cadiz",
         "nombre": "Sergio Ruiz",
         "correo": "sergio.ruiz@email.com",
@@ -96,7 +88,6 @@ db.Usuario.insertMany([
         "mascota": "asistencia"
     },
     {
-        "_id": 15,
         "alias": "raquel_winelover",
         "nombre": "Raquel Díaz",
         "correo": "raquel.d@email.com",
@@ -105,7 +96,6 @@ db.Usuario.insertMany([
         "mascota": "tolerante"
     },
     {
-        "_id": 21,
         "alias": "ivan_alpinista",
         "nombre": "Iván Torres",
         "correo": "ivan.t@email.com",
@@ -114,7 +104,6 @@ db.Usuario.insertMany([
         "mascota": "null"
     },
     {
-        "_id": 30,
         "alias": "elena_vinitos",
         "nombre": "Elena Sanz",
         "correo": "elena.sanz@email.com",
@@ -123,7 +112,6 @@ db.Usuario.insertMany([
         "mascota": "compañia"
     },
     {
-        "_id": 31,
         "alias": "pedro_rioja",
         "nombre": "Pedro Cano",
         "correo": "pedro.c@email.com",
@@ -132,7 +120,6 @@ db.Usuario.insertMany([
         "mascota": "tolerante"
     },
     {
-        "_id": 32,
         "alias": "sofia_gastronomia",
         "nombre": "Sofía Varga",
         "correo": "sofia.v@email.com",
@@ -141,7 +128,6 @@ db.Usuario.insertMany([
         "mascota": "compañia"
     },
     {
-        "_id": 45,
         "alias": "david_alpin",
         "nombre": "David Peña",
         "correo": "david.p@email.com",
@@ -156,7 +142,7 @@ db.Usuario.insertMany([
 // 2. Colección de Destinos (Incluyendo sus recomendaciones anidadas)
 db.Destino.insertMany([
     {
-        "_id": 1,
+        "alias_destino": "picos-europa",
         "nombre": "Picos de Europa",
         "descripcion": "Parque Nacional en los Picos de Europa",
         "ubicacion": { "type": "Point", "coordinates": [-4.820179, 43.189094] },
@@ -166,17 +152,7 @@ db.Destino.insertMany([
         ]
     },
     {
-        "_id": 8,
-        "nombre": "Camino de Santiago",
-        "descripcion": "Ruta de peregrinación desde Roncesvalles",
-        "ubicacion": { "type": "Point", "coordinates": [-1.271104, 42.669149] },
-        "dificultad": 2,
-        "recomendaciones": [
-            { "nombre": "Albergue del Peregrino", "descuento": 15.50 }
-        ]
-    },
-    {
-        "_id": 15,
+        "alias_destino": "tarifa-beach",
         "nombre": "Tarifa",
         "descripcion": "Punto de encuentro entre el Atlántico y el Mediterráneo, ideal para deportes de viento.",
         "ubicacion": { "type": "Point", "coordinates": [-5.6033, 36.0127] },
@@ -187,40 +163,37 @@ db.Destino.insertMany([
         ]
     },
     {
-        "_id": 22,
+        "alias_destino": "playa-bolonia",
         "nombre": "Playa de Bolonia",
         "descripcion": "Famosa por su duna gigante y las ruinas romanas de Baelo Claudia.",
         "ubicacion": { "type": "Point", "coordinates": [-5.7738, 36.0889] },
         "dificultad": 1,
         "recomendaciones": [
-            { "nombre": "Entrada Museo Baelo Claudia", "descuento": 100.00 },
-            { "nombre": "Pack Sombrilla + Hamaca", "descuento": 20.00 }
+            { "nombre": "Entrada Museo Baelo Claudia", "descuento": 100.00 }
         ]
     },
     {
-        "_id": 102,
+        "alias_destino": "refugio-renclusa",
         "nombre": "Refugio de la Renclusa",
         "descripcion": "Refugio base emblemático para las ascensiones en el macizo de la Maladeta.",
         "ubicacion": { "type": "Point", "coordinates": [0.6508, 42.6694] },
         "dificultad": 3,
         "recomendaciones": [
-            { "nombre": "Media pensión en refugio", "descuento": 5.00 },
-            { "nombre": "Mapa cartográfico del sector", "descuento": 10.00 }
+            { "nombre": "Media pensión en refugio", "descuento": 5.00 }
         ]
     },
     {
-        "_id": 103,
+        "alias_destino": "cima-aneto",
         "nombre": "Cima Aneto",
         "descripcion": "El punto más alto de los Pirineos (3.404m) cruzando el Glaciar y el Paso de Mahoma.",
         "ubicacion": { "type": "Point", "coordinates": [0.6568, 42.6321] },
         "dificultad": 5,
         "recomendaciones": [
-            { "nombre": "Alquiler de crampones y piolet", "descuento": 12.00 },
-            { "nombre": "Seguro de rescate en montaña", "descuento": 10.00 }
+            { "nombre": "Alquiler de crampones y piolet", "descuento": 12.00 }
         ]
     },
     {
-        "_id": 50,
+        "alias_destino": "laurel-logrono",
         "nombre": "Calle Laurel (Logroño)",
         "descripcion": "La zona de pinchos y tapeo más famosa de la capital riojana.",
         "ubicacion": { "type": "Point", "coordinates": [-2.4474, 42.4655] },
@@ -230,14 +203,13 @@ db.Destino.insertMany([
         ]
     },
     {
-        "_id": 55,
+        "alias_destino": "bodegas-haro",
         "nombre": "Bodegas Haro",
         "descripcion": "Visita al Barrio de la Estación, cuna de las bodegas históricas de Rioja.",
         "ubicacion": { "type": "Point", "coordinates": [-2.8475, 42.5833] },
         "dificultad": 1,
         "recomendaciones": [
-            { "nombre": "Cata premium de 3 vinos", "descuento": 20.00 },
-            { "nombre": "Caja de 6 botellas reserva", "descuento": 10.00 }
+            { "nombre": "Cata premium de 3 vinos", "descuento": 20.00 }
         ]
     }
 ]);
@@ -248,100 +220,69 @@ db.Viaje.insertMany([
     {
         "nombre": "Ruta por los Picos",
         "descripcion": "Excursión de 3 días por los Picos de Europa",
-        "idCreador": 1,
+        "aliasCreador": "carlos_picos",
         "maxParticipantes": 6,
         "fecha_inicio": ISODate("2026-01-23T09:00:00Z"),
         "fecha_fin": ISODate("2026-01-25T18:00:00Z"),
         "tabaco": true,
-        "mascota": "TODAS",
-        "participantes": [1, 2, 3, 4], // Array de IDs de usuarios (Referencia)
-        "etapas": [ // Documentos anidados (Embedding)
+        "mascota": "compañia",
+        "participantes": ["carlos_picos", "javi_montaña", "marta_senderos"],
+        "etapas": [
             {
-                "idDestino": 1,
+                "aliasDestino": "picos-europa",
                 "nombreDestino": "Picos de Europa",
                 "horaInicio": "09:00",
                 "duracionMinutos": 300
-            },
-            {
-                "idDestino": 8,
-                "nombreDestino": "Camino de Santiago",
-                "horaInicio": "14:00",
-                "duracionMinutos": 180
             }
         ]
     },
     {
-        "nombre": "Costa de la Luz en Furgo",
-        "descripcion": "Recorrido por las playas de Cádiz y Huelva",
-        "idCreador": 5,
+        "nombre": "Cima del Pirineo",
+        "descripcion": "Ascenso técnico al Aneto desde el refugio",
+        "aliasCreador": "marcos_aneto",
         "maxParticipantes": 4,
-        "fecha_inicio": ISODate("2026-02-10T10:00:00Z"),
-        "fecha_fin": ISODate("2026-02-15T20:00:00Z"),
-        "tabaco": true,
-        "mascota": "PERROS_PEQUEÑOS",
-        "participantes": [5, 12],
-        "etapas": [
-            {
-                "idDestino": 15,
-                "nombreDestino": "Tarifa",
-                "horaInicio": "10:00",
-                "duracionMinutos": 600
-            },
-            {
-                "idDestino": 22,
-                "nombreDestino": "Playa de Bolonia",
-                "horaInicio": "11:00",
-                "duracionMinutos": 240
-            }
-        ]
-    },
-    {
-        "nombre": "Ascensión al Aneto",
-        "descripcion": "Ruta de alta montaña para montañeros experimentados",
-        "idCreador": 10,
-        "maxParticipantes": 5,
-        "fecha_inicio": ISODate("2026-05-15T07:00:00Z"),
-        "fecha_fin": ISODate("2026-05-17T16:00:00Z"),
+        "fecha_inicio": ISODate("2026-06-12T06:00:00Z"),
+        "fecha_fin": ISODate("2026-06-14T20:00:00Z"),
         "tabaco": false,
-        "mascota": "NO",
-        "participantes": [10, 3, 45, 21],
+        "mascota": "intolerante",
+        "participantes": ["marcos_aneto", "david_alpin", "ivan_alpinista"],
         "etapas": [
             {
-                "idDestino": 102,
+                "aliasDestino": "refugio-renclusa",
                 "nombreDestino": "Refugio de la Renclusa",
-                "horaInicio": "08:00",
-                "duracionMinutos": 420
+                "horaInicio": "14:00",
+                "duracionMinutos": 240
             },
             {
-                "idDestino": 103,
+                "aliasDestino": "cima-aneto",
                 "nombreDestino": "Cima Aneto",
                 "horaInicio": "05:00",
-                "duracionMinutos": 540
+                "duracionMinutos": 480
             }
         ]
     },
     {
-        "nombre": "Vinos y Tapas por la Rioja",
-        "descripcion": "Fin de semana de enoturismo por Logroño y alrededores",
-        "idCreador": 2,
-        "maxParticipantes": 10,
-        "fecha_inicio": ISODate("2026-03-20T18:00:00Z"),
-        "fecha_fin": ISODate("2026-03-22T21:00:00Z"),
-        "tabaco": false,
-        "mascota": "TODAS",
-        "participantes": [2, 8, 15, 30, 31, 32],
+        "nombre": "Cata y Tapas Riojanas",
+        "descripcion": "Ruta de fin de semana por Logroño y Haro",
+        "aliasCreador": "ana_rioja",
+        "maxParticipantes": 12,
+        "fecha_inicio": ISODate("2026-04-10T19:00:00Z"),
+        "fecha_fin": ISODate("2026-04-12T16:00:00Z"),
+        "tabaco": true,
+        "mascota": "tolerante",
+        "participantes": ["ana_rioja", "pablo_camino", "raquel_winelover", "pedro_rioja", "sofia_gastronomia", "elena_vinitos"],
         "etapas": [
             {
-                "idDestino": 50,
+                "aliasDestino": "laurel-logrono",
                 "nombreDestino": "Calle Laurel (Logroño)",
                 "horaInicio": "20:30",
                 "duracionMinutos": 180
             },
             {
-                "idDestino": 55,
+                "aliasDestino": "bodegas-haro",
                 "nombreDestino": "Bodegas Haro",
-                "horaInicio": "11:00",
-                "duracionMinutos": 120
+                "horaInicio": "11:30",
+                "duracionMinutos": 150
             }
         ]
     }
@@ -349,4 +290,5 @@ db.Viaje.insertMany([
 
 // Creación de índices para optimizar búsquedas [cite: 79]
 db.Usuario.createIndex({ "alias": 1 }, { unique: true });
+db.destinos.createIndex({ "alias_destino": 1 }, { unique: true })
 db.Destino.createIndex({ "ubicacion": "2dsphere" }); // Índice geoespacial
