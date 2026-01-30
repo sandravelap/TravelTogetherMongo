@@ -18,6 +18,11 @@ public class ViajesServices {
             viajeDTO = new ViajeDTO();
             viajeDTO.setNombre(viaje.getNombre());
             viajeDTO.setDescripcion(viaje.getDescripcion());
+            viajeDTO.setMaxParticipantes(viaje.getMaxParticipantes());
+            viajeDTO.setFechaInicio(viaje.getFecha_inicio().toLocalDate());
+            viajeDTO.setFechaFin(viaje.getFecha_fin().toLocalDate());
+            viajeDTO.setTabaco(viaje.isTabaco());
+            viajeDTO.setMascota(viaje.getMascota());
             viajes.add(viajeDTO);
         }
         return viajes;

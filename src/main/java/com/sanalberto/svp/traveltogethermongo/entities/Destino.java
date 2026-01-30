@@ -1,13 +1,17 @@
 package com.sanalberto.svp.traveltogethermongo.entities;
 
 
+import org.bson.types.ObjectId;
+
 import java.util.List;
 
 
 public class Destino {
 
 
-    private Integer id;
+    private ObjectId id;
+
+    private String alias_destino;
 
     private String nombre;
 
@@ -19,12 +23,18 @@ public class Destino {
 
     private List<Recomendacion> recomendaciones;
 
-    public Integer getId() {
+    public ObjectId getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(ObjectId id) {
         this.id = id;
+    }
+
+    public String getAlias_destino() {return alias_destino;}
+
+    public void setAlias_destino(String alias_destino) {
+        this.alias_destino = alias_destino;
     }
 
     public String getNombre() {

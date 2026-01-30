@@ -16,10 +16,12 @@ public class UsuarioDAO {
         this.collection = db.getCollection("Usuario", Usuario.class);
     }
 
+    //Create
     public void insertarUsuario(Usuario user) {
         collection.insertOne(user);
     }
 
+    //Read
     public Usuario buscarPorAlias(String alias) {
         // Ya no devuelve un Document, sino un objeto Usuario directamente
         return collection.find(Filters.eq("alias", alias)).first();

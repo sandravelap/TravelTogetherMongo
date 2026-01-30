@@ -10,6 +10,8 @@ public class Main {
         for (ViajeDTO viajeDTO :viajesServices.mostrarViajes()){
             System.out.println(viajeDTO.getNombre());
             System.out.println(viajeDTO.getDescripcion());
+            System.out.println(viajeDTO.getFechaInicio());
+            System.out.println(viajeDTO.isTabaco());
         }
     }
 }

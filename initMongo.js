@@ -290,5 +290,5 @@ db.Viaje.insertMany([
 
 // Creación de índices para optimizar búsquedas [cite: 79]
 db.Usuario.createIndex({ "alias": 1 }, { unique: true });
-db.destinos.createIndex({ "alias_destino": 1 }, { unique: true })
+db.Destino.createIndex({ "alias_destino": 1 }, { unique: true })
 db.Destino.createIndex({ "ubicacion": "2dsphere" }); // Índice geoespacial
