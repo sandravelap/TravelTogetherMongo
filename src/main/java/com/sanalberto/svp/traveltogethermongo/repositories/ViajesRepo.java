@@ -18,7 +18,6 @@ public class ViajesRepo {
                 .getCollection("Viaje", Viaje.class);
     }
 
-
     public List<Viaje> getViajes(){
         // Recupera todos los documentos de la colección y los convierte a objetos Viaje
         return collection.find().into(new ArrayList<>());

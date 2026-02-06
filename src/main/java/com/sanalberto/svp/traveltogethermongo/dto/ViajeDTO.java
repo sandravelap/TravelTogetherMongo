@@ -6,7 +6,6 @@ public class ViajeDTO {
     private String nombre;
     private String descripcion;
     private Integer maxParticipantes;
-    // El mejor reemplazo para ISODate("...") de MongoDB
     private LocalDate fechaInicio;
     private LocalDate fechaFin;
     private boolean tabaco;
