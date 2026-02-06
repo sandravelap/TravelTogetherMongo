@@ -18,6 +18,10 @@ ahora en la capa de aplicación o mediante JSON Schema Validation en la colecci�
 
  */
 
+// Notas personales:
+// 1.- docker run mongo >> docker run --name mongoTravel -it -p 27018:27017 -e MONGO_INITDB_ROOT_USERNAME="root" -e MONGO_INITDB_ROOT_PASSWORD="root" -d mongo
+// 2.- Después ejecutar archivo en la flecha verde.
+
 // Seleccionar o crear la base de datos
 use('traveltogether');
 
