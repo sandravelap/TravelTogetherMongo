@@ -31,21 +31,29 @@ public class ViajesServices {
     }
 
     public String createParseViaje(NewViajeDTO inputViajeDTO){
+        List<String> mascotasOptions = List.of("todas", "asistencia", "no");
         String output = "";
         Viaje viajeDAO = new Viaje();
 
-        // todo: validar mascotas (todas, tolerante, ninguna, null)
+        // todo: validar el token.
 
-        LocalDateTime parsedLocalDateFechaInicio = LocalDateTime.of(inputViajeDTO.getDiaInicio().getYear(), inputViajeDTO.getDiaInicio().getMonthValue(), inputViajeDTO.getDiaInicio().getDayOfMonth(), 0, 0, 0);
-        LocalDateTime parsedLocalDateFechaFin = LocalDateTime.of(inputViajeDTO.getDiaFin().getYear(), inputViajeDTO.getDiaFin().getMonthValue(), inputViajeDTO.getDiaFin().getDayOfMonth(), 0, 0, 0);
+        // Se validan las mascotas para que concuerden con las opciones establecidas (todas, tolerante, ninguna, null).
+        if(mascotasOptions.contains(viajeDAO.getMascota().toLowerCase())){
+            viajeDAO.setNombre(inputViajeDTO.getNombre());
+            viajeDAO.setDescripcion(inputViajeDTO.getDescripcion());
 
-        // fixme: get _id, aliasCreador, etapas and participantes.
-        viajeDAO.setNombre(inputViajeDTO.getNombre());
-        viajeDAO.setDescripcion(inputViajeDTO.getDescripcion());
-        viajeDAO.setFecha_inicio(parsedLocalDateFechaInicio);
-        viajeDAO.setFecha_fin(parsedLocalDateFechaFin);
-        viajeDAO.setTabaco(inputViajeDTO.getTabaco());
-        viajeDAO.setMascota(inputViajeDTO.getMascota());
+            // fixme: get _id, aliasCreador, etapas and participantes.
+            // Se añade como hora la medianoche (00:00:00).
+            viajeDAO.setFecha_inicio(inputViajeDTO.getDiaInicio().atStartOfDay());
+            viajeDAO.setFecha_fin(inputViajeDTO.getDiaFin().atStartOfDay());
+            viajeDAO.setTabaco(inputViajeDTO.getTabaco());
+            viajeDAO.setMascota(inputViajeDTO.getMascota());
+
+            output = viajesRepo.insertNewViaje(viajeDAO);
+        }
+        else{
+            output = "MONGO >> No se ha podido guardar el nuevo viaje, el campo mascotas debe ser \"TODAS\", \"ASISTENCIA\" o \"NO\".";
+        }
 
         return output;
     }

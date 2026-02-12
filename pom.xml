@@ -47,7 +47,8 @@
             <version>3.0.4</version>
             <scope>compile</scope>
         </dependency>
-        <!-- Dependencias MongoDB -->
+
+        <!-- Dependencias MongoDB y Bson -->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-driver-sync</artifactId>
@@ -83,6 +84,9 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
             </plugin>
         </plugins>
     </build>
