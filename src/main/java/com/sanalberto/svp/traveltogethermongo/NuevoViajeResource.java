@@ -25,6 +25,7 @@ public class NuevoViajeResource {
     public String guardarNuevoViaje(String jsonInput){
         String output = "";
 
+        // Al tener que entrar en una propiedad interna de una clase, se deserializa para poder serializarlo de nuevo junto con las propiedades internas de la clase (LocalDateTime).
         Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
                 @Override

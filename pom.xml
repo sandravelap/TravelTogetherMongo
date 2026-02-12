@@ -41,6 +41,14 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencias MongoDB -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>5.7.0-alpha0</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-jdbc</artifactId>
@@ -48,13 +56,7 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- Dependencias MongoDB y Bson -->
-        <dependency>
-            <groupId>org.mongodb</groupId>
-            <artifactId>mongodb-driver-sync</artifactId>
-            <version>5.7.0-alpha0</version>
-            <scope>compile</scope>
-        </dependency>
+        <!-- Dependencia de Bson -->
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>bson</artifactId>
