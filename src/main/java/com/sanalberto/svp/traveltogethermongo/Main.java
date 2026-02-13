@@ -6,6 +6,8 @@ import com.sanalberto.svp.traveltogethermongo.services.ViajesServices;
 
 public class Main {
     public static void main(String[] args) {
+
+        /* todo: tba!
         ViajesServices viajesServices = new ViajesServices();
         for (ViajeDTO viajeDTO :viajesServices.mostrarViajes()){
             System.out.println(viajeDTO.getNombre());
@@ -13,5 +15,6 @@ public class Main {
             System.out.println(viajeDTO.getFechaInicio());
             System.out.println(viajeDTO.isTabaco());
         }
+        */
     }
 }
