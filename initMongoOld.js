@@ -25,47 +25,6 @@ ahora en la capa de aplicación o mediante JSON Schema Validation en la colecci�
 // Seleccionar o crear la base de datos
 use('traveltogether');
 
-//definición de la estructura de las colecciones:
-
-db.createCollection("usuarios", {
-    validator: {
-        $jsonSchema: {
-            bsonType: "object",
-            required: ["alias", "nombre", "correo", "pass"], // Campos que DEBEN existir
-            properties: {
-                alias: {
-                    bsonType: "string",
-                    description: "El alias debe ser un string y es obligatorio"
-                },
-                nombre: {
-                    bsonType: "string",
-                    description: "El nombre es obligatorio"
-                },
-                correo: {
-                    bsonType: "string",
-                    pattern: "^.+@.+$", // Opcional: validación básica de email
-                    description: "El correo debe ser un string válido"
-                },
-                pass: {
-                    bsonType: "string",
-                    description: "La contraseña es obligatoria"
-                },
-                tabaco: {
-                    enum: ["fumador", "tolerante", "intolerante", null], // Permite null explícito o valores del enum
-                    description: "Solo puede ser uno de los valores definidos o null"
-                },
-                mascota: {
-                    enum: ["compañía", "asistencia", "tolerante", "intolerante", null], // Permite null explícito o valores del enum
-                    description: "Solo puede ser uno de los valores definidos o null"
-                }
-            }
-        }
-    }
-});
-
-// Creación de índices para optimizar búsquedas
-db.usuarios.createIndex({ "alias": 1 }, { unique: true });
-
 // 1. Colección de Usuarios
 db.Usuario.insertMany([
     {
@@ -74,7 +33,7 @@ db.Usuario.insertMany([
         "correo": "carlos.rodriguez@email.com",
         "pass": "$2b$12$K9R.B8u5fG8...",
         "tabaco": "fumador",
-        "mascota": "compañía"
+        "mascota": "compañia"
     },
     {
         "alias": "ana_rioja",
@@ -98,7 +57,7 @@ db.Usuario.insertMany([
         "correo": "marta.g@email.com",
         "pass": "$2b$12$S7E.I9c3pP8...",
         "tabaco": "null",
-        "mascota": "compañía"
+        "mascota": "compañia"
     },
     {
         "alias": "lucia_furgo",
@@ -106,7 +65,7 @@ db.Usuario.insertMany([
         "correo": "lucia.garcia@email.com",
         "pass": "$2b$12$N2Z.D4x8kJ3...",
         "tabaco": "fumador",
-        "mascota": "compañía"
+        "mascota": "compañia"
     },
     {
         "alias": "pablo_camino",
@@ -154,7 +113,7 @@ db.Usuario.insertMany([
         "correo": "elena.sanz@email.com",
         "pass": "$2b$12$Q5C.G7a5nM6...",
         "tabaco": "null",
-        "mascota": "compañía"
+        "mascota": "compañia"
     },
     {
         "alias": "pedro_rioja",
@@ -170,7 +129,7 @@ db.Usuario.insertMany([
         "correo": "sofia.v@email.com",
         "pass": "$2b$12$X2J.N4h8uU3...",
         "tabaco": "fumador",
-        "mascota": "compañía"
+        "mascota": "compañia"
     },
     {
         "alias": "david_alpin",
@@ -183,8 +142,6 @@ db.Usuario.insertMany([
 
     // ... rest of users
 ]);
-
-
 
 // 2. Colección de Destinos (Incluyendo sus recomendaciones anidadas)
 db.Destino.insertMany([
@@ -261,52 +218,8 @@ db.Destino.insertMany([
     }
 ]);
 
-// 3. Colección de Viajes
+// 3. Colección de Viajes (El "corazón" de la migración)
 // En lugar de una tabla Participacion y Etapa, anidamos los arrays.
-
-db.createCollection("viajes", {
-    validator: {
-        $and: [
-            {
-                $jsonSchema: {
-                    bsonType: "object",
-                    required: ["nombre", "aliasCreador", "fecha_inicio", "fecha_fin", "etapas"],
-                    properties: {
-                        nombre: { bsonType: "string" },
-                        maxParticipantes: { bsonType: "int", minimum: 1 },
-                        fecha_inicio: { bsonType: "date" },
-                        fecha_fin: { bsonType: "date" },
-                        etapas: {
-                            bsonType: "array",
-                            items: {
-                                bsonType: "object",
-                                required: ["aliasDestino", "duracionMinutos"],
-                                properties: {
-                                    duracionMinutos: { bsonType: "int", minimum: 1 }
-                                }
-                            }
-                        }
-                    }
-                }
-            },
-            {
-                $expr: { $gte: ["$fecha_fin", "$fecha_inicio"] } //para asegurar que la fecha de fin sea posterior
-            }
-        ]
-    }
-});
-
-// Crear los índices de rendimiento para optimizar las búsquedas
-//Si en el front-end tienes un buscador de "Viajes disponibles entre fecha A y fecha B", este índice es obligatorio.
-//Este es un índice ascendente por fecha de inicio:
-db.viajes.createIndex({ "fecha_inicio": 1 });
-// Optimiza búsquedas por destino dentro del array de etapas
-db.viajes.createIndex({ "etapas.aliasDestino": 1 });
-// Optimiza saber en qué viajes está un usuario
-db.viajes.createIndex({ "participantes": 1 });
-//Para mostrarle a un usuario "Mis Viajes Creados" de forma instantánea
-db.viajes.createIndex({ "aliasCreador": 1 });
-
 db.Viaje.insertMany([
     {
         "nombre": "Ruta por los Picos",
@@ -379,7 +292,7 @@ db.Viaje.insertMany([
     }
 ]);
 
-
-
+// Creación de índices para optimizar búsquedas [cite: 79]
+db.Usuario.createIndex({ "alias": 1 }, { unique: true });
 db.Destino.createIndex({ "alias_destino": 1 }, { unique: true })
 db.Destino.createIndex({ "ubicacion": "2dsphere" }); // Índice geoespacial
