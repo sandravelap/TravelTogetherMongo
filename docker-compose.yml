@@ -28,7 +28,7 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=admin
       - MONGO_INITDB_DATABASE=traveltogether
     ports:
-      - "27017:27017"
+      - "27018:27017"
     networks:
       - app-network
     volumes:

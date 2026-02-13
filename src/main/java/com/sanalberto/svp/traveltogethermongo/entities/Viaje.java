@@ -25,8 +25,7 @@ public class Viaje {
     // Relación 1:N embebida: Lista de objetos Etapa
     private List<Etapa> etapas;
 
-    public Viaje() {
-    }
+    public Viaje() {}
 
     public Viaje(ObjectId _id, String aliasCreador, String nombre, String descripcion, int maxParticipantes, LocalDateTime fecha_inicio, LocalDateTime fecha_fin, boolean tabaco, String mascota, List<String> aliasParticipantes, List<Etapa> etapas) {
         this._id = _id;

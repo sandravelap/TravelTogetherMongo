@@ -11,6 +11,15 @@ public class Etapa {
     private String horaInicio;
     private Integer duracionMinutos;
 
+    public Etapa() {}
+
+    public Etapa(ObjectId idDestino, String alias_destino, String nombreDestino, String horaInicio, Integer duracionMinutos) {
+        this.idDestino = idDestino;
+        this.alias_destino = alias_destino;
+        this.nombreDestino = nombreDestino;
+        this.horaInicio = horaInicio;
+        this.duracionMinutos = duracionMinutos;
+    }
 
     public ObjectId getIdDestino() {
         return idDestino;
