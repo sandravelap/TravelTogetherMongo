@@ -1,4 +1,5 @@
 package com.sanalberto.svp.traveltogethermongo.repositories;
+import com.google.gson.Gson;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
@@ -39,6 +40,20 @@ public class ViajesRepo {
         return collection.find(Filters.regex("nombre","Picos"))
                 .into(new ArrayList<>());
 
+    }
+
+    public String insertNewViaje(Viaje viajeDao){
+        String output = "";
+
+        // Hace el insert del viaje y devuelve una respuesta dependiendo del resultado de la inserción.
+        if(collection.insertOne(viajeDao).wasAcknowledged()){
+            output = "MONGO >> Viaje registrado exitosamente.";
+        }
+        else{
+            output = "MONGO >> No se ha podido registrar el viaje.";
+        }
+
+        return output;
     }
 }
 

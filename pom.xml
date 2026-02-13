@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+    <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.sanalberto.svp</groupId>
-  <artifactId>TravelTogetherMongo</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>TravelTogetherMongo</name>
-  <packaging>war</packaging>
+    <groupId>com.sanalberto.svp</groupId>
+    <artifactId>TravelTogetherMongo</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <name>TravelTogetherMongo</name>
+    <packaging>war</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,22 +18,22 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     </properties>
     <dependencies>
         <dependency>
-          <groupId>jakarta.enterprise</groupId>
-          <artifactId>jakarta.enterprise.cdi-api</artifactId>
-          <version>4.1.0</version>
-          <scope>provided</scope>
+            <groupId>jakarta.enterprise</groupId>
+            <artifactId>jakarta.enterprise.cdi-api</artifactId>
+            <version>4.1.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-          <groupId>jakarta.ws.rs</groupId>
-          <artifactId>jakarta.ws.rs-api</artifactId>
-          <version>4.0.0</version>
-          <scope>provided</scope>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
+            <version>4.0.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
-          <groupId>org.junit.jupiter</groupId>
-          <artifactId>junit-jupiter-api</artifactId>
-          <version>${junit.version}</version>
-          <scope>test</scope>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -41,35 +41,62 @@ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencias MongoDB -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-driver-sync</artifactId>
+            <version>5.7.0-alpha0</version>
+            <scope>compile</scope>
+        </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongodb-jdbc</artifactId>
             <version>3.0.4</version>
             <scope>compile</scope>
         </dependency>
-      <!-- Source: https://mvnrepository.com/artifact/org.mongodb/mongodb-driver-sync -->
-      <dependency>
-          <groupId>org.mongodb</groupId>
-          <artifactId>mongodb-driver-sync</artifactId>
-          <version>5.7.0-alpha0</version>
-          <scope>compile</scope>
-      </dependency>
-      <!-- Source: https://mvnrepository.com/artifact/org.mongodb/bson -->
-      <dependency>
-          <groupId>org.mongodb</groupId>
-          <artifactId>bson</artifactId>
-          <version>5.7.0-alpha0</version>
-          <scope>compile</scope>
-      </dependency>
-  </dependencies>
 
-  <build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-war-plugin</artifactId>
-            <version>3.4.0</version>
-      </plugin>
-    </plugins>
-  </build>
+        <!-- Dependencia de Bson -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>bson</artifactId>
+            <version>5.7.0-alpha0</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Dependencia MySQL -->
+        <dependency>
+            <groupId>com.mysql</groupId>
+            <artifactId>mysql-connector-j</artifactId>
+            <version>9.5.0</version>
+        </dependency>
+
+        <!-- Dependencia Gson -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.13.2</version>
+        </dependency>
+
+        <!-- Dependencia de java JWT para el token. -->
+        <dependency>
+            <groupId>com.auth0</groupId>
+            <artifactId>java-jwt</artifactId>
+            <version>4.5.0</version>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>
