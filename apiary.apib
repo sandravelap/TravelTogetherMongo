@@ -76,7 +76,23 @@ Recurso encargado de la creación de nuevos viajes dentro del sistema.
 
 ### Crear un viaje nuevo [POST]
 
-Este endpoint permite registrar un nuevo viaje proporcionando la información básica del mismo.
+Este endpoint permite registrar un nuevo viaje proporcionando la información básica del mismo. Se requiere de un header que contenga el correo del usuario además de un token de acceso, el cual es generado al registrar el usuario con su contraseña.
+
+E. g.
+
+POST http://localhost:8088/travelTogether/api/NuevoViaje
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJ0dV9hcHAiLCJzdWIiOiJ1c3VhcmlvX2VqZW1wbG8iLCJpYXQiOjE3MDc4MTgyMDAsImV4cCI6MTcwNzgyMTgwMH0.ejemplo_de_firma_segura
+
+{
+  "diaInicio": "2026-06-15",
+  "diaFin": "2026-06-30",
+  "numero_participantes": 4,
+  "nombre": "Ruta por los Pirineos",
+  "descripcion": "Viaje de senderismo y acampada con amigos.",
+  "tabaco": false,
+  "mascota": "todas"
+}
 
 + Request (application/json)
 

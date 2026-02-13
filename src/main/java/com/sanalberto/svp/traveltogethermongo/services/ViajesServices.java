@@ -30,23 +30,21 @@ public class ViajesServices {
         return viajes;
     }
 
-    public String createParseViaje(NewViajeDTO inputViajeDTO){
+    public String createParseViaje(String alias, NewViajeDTO inputViajeDTO){
         List<String> mascotasOptions = List.of("TODAS", "ASISTENCIA", "NO");
         String output = "";
         Viaje viajeDAO = new Viaje();
 
-        // todo: validar el token.
-
         // Se validan las mascotas para que concuerden con las opciones establecidas (todas, asistencia, no, null).
         if(mascotasOptions.contains(inputViajeDTO.getMascota().toUpperCase())){
+
+            // todo: get _id, etapas and participantes.
             // viajeDAO.set_id(10001);
-            viajeDAO.setAliasCreador("AliasCreador_0001");
+            viajeDAO.setAliasCreador(alias);
             viajeDAO.setNombre(inputViajeDTO.getNombre());
             viajeDAO.setDescripcion(inputViajeDTO.getDescripcion());
 
-            // fixme: get _id, aliasCreador, etapas and participantes.
             // Se añade como hora la medianoche (00:00:00).
-
             viajeDAO.setFecha_inicio(inputViajeDTO.getDiaInicio().atStartOfDay());
             viajeDAO.setFecha_fin(inputViajeDTO.getDiaFin().atStartOfDay());
             viajeDAO.setTabaco(inputViajeDTO.getTabaco());

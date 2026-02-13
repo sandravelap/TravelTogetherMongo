@@ -4,12 +4,16 @@ package com.sanalberto.svp.traveltogethermongo.entities;
 import org.bson.types.ObjectId;
 
 public class Usuario {
-    private ObjectId id; // MongoDB usa ObjectId por defecto
+
+    // MongoDB usa ObjectId por defecto.
+    private ObjectId id;
     private String alias;
     private String nombre;
     private String correo;
     private String pass;
-    private String tabaco; // Mapeamos el ENUM de SQL como String
+
+    // Se mapea el ENUM de SQL como String.
+    private String tabaco;
     private String mascota;
 
     public Usuario() {

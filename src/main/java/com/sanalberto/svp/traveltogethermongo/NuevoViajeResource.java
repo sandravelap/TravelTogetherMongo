@@ -7,7 +7,9 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.SecurityContext;
 import org.bson.json.JsonParseException;
 
 import java.lang.reflect.Type;
@@ -22,10 +24,11 @@ public class NuevoViajeResource {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    public String guardarNuevoViaje(String jsonInput){
+    public String guardarNuevoViaje(@Context SecurityContext securityContext, String jsonInput){
         String output = "";
+        String alias = securityContext.getUserPrincipal().getName();
 
-        // Al tener que entrar en una propiedad interna de una clase, se deserializa para poder serializarlo de nuevo junto con las propiedades internas de la clase (LocalDateTime).
+        // Al tener que entrar en una propiedad interna de una clase nativa de Java, se reserializa para poder acceder con Gson a las propiedades internas de la clase (LocalDateTime).
         Gson gson = new GsonBuilder()
             .registerTypeAdapter(LocalDate.class, new JsonDeserializer<LocalDate>() {
                 @Override
@@ -43,7 +46,7 @@ public class NuevoViajeResource {
             .create();
 
         NewViajeDTO newViajeDto = gson.fromJson(jsonInput, NewViajeDTO.class);
-        output = insertViajesServices.createParseViaje(newViajeDto);
+        output = insertViajesServices.createParseViaje(alias, newViajeDto);
 
         return output;
     }
