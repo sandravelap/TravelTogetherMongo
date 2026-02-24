@@ -85,6 +85,13 @@
             <version>4.5.0</version>
         </dependency>
 
+        <!-- Se puede combinar Mongo con Hibernate. Comentar a Sandra. -->
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongodb-hibernate</artifactId>
+            <version>1.0.0-alpha0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

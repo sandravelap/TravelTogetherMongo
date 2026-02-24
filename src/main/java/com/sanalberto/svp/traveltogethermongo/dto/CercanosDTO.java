@@ -11,8 +11,8 @@ public class CercanosDTO {
     private Double latitude;
     @QueryParam("radio")
     private double radio;
-// Constructores
 
+    // Constructores
     public CercanosDTO() {
     }
 
@@ -21,8 +21,8 @@ public class CercanosDTO {
         this.latitude = latitude;
         this.radio = radio;
     }
-// Getters y setters
 
+    // Getters y setters
     public Double getLongitude() {
         return longitude;
     }

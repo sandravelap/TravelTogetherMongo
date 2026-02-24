@@ -7,4 +7,4 @@ import java.lang.annotation.RetentionPolicy;
 // Esta interfaz simplemente se aplica a aquellas peticiones o métodos que requieran verificar el token.
 @NameBinding
 @Retention(RetentionPolicy.RUNTIME)
-public @interface JwtTokenNeeded { }
+public @interface JwtTokenNeeded {}

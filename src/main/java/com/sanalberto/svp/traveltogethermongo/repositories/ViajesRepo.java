@@ -4,9 +4,13 @@ import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.sanalberto.svp.traveltogethermongo.database.Connection;
+import com.sanalberto.svp.traveltogethermongo.entities.Etapa;
 import com.sanalberto.svp.traveltogethermongo.entities.Viaje;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -51,6 +55,21 @@ public class ViajesRepo {
         }
         else{
             output = "MONGO >> No se ha podido registrar el viaje.";
+        }
+
+        return output;
+    }
+
+    public String updateEtapasViaje(int inputId, List<Etapa> etapasArrayList){
+        String output = "";
+
+        Bson bsonId = Filters.eq("_id", inputId);
+        // todo: check
+        if (collection.updateMany(bsonId, (Bson) etapasArrayList).wasAcknowledged()){
+            output = "MONGO >> etapa con ID " + inputId + " actualizada correctamente.";
+        }
+        else{
+            output = "MONGO >> Ha habido un error al actualizar la tabla.";
         }
 
         return output;

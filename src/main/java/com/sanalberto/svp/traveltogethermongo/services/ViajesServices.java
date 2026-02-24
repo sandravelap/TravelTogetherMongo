@@ -1,11 +1,16 @@
 package com.sanalberto.svp.traveltogethermongo.services;
 
 import com.sanalberto.svp.traveltogethermongo.dto.NewViajeDTO;
+import com.sanalberto.svp.traveltogethermongo.dto.UpdateEtapaDTO;
 import com.sanalberto.svp.traveltogethermongo.dto.ViajeDTO;
+import com.sanalberto.svp.traveltogethermongo.entities.Etapa;
 import com.sanalberto.svp.traveltogethermongo.entities.Viaje;
 import com.sanalberto.svp.traveltogethermongo.repositories.ViajesRepo;
+import org.bson.BsonDocument;
+import org.bson.BsonInt32;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.conversions.Bson;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +60,18 @@ public class ViajesServices {
         else{
             output = "MONGO >> No se ha podido guardar el nuevo viaje, el campo mascotas debe ser \"TODAS\", \"ASISTENCIA\" o \"NO\".";
         }
+
+        return output;
+    }
+
+    public String updateEtapas(UpdateEtapaDTO inputNewEtapa){
+        String output = "";
+
+        List<Etapa> etapasArrayList = inputNewEtapa.getUpdateEtapasArrayList();
+
+        // fixme: id needs to be a Bson
+        // fixed!
+        viajesRepo.updateEtapasViaje(inputNewEtapa.getId(), etapasArrayList);
 
         return output;
     }
