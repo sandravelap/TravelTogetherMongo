@@ -184,9 +184,71 @@ db.Usuario.insertMany([
     // ... rest of users
 ]);
 
-
-
 // 2. Colección de Destinos (Incluyendo sus recomendaciones anidadas)
+db.createCollection("Destino", {
+    validator: {
+        $jsonSchema: {
+            bsonType: "object",
+            required: ["alias_destino", "nombre", "ubicacion", "dificultad"],
+            properties: {
+                alias_destino: {
+                    bsonType: "string",
+                    description: "Identificador único legible para el destino"
+                },
+                nombre: {
+                    bsonType: "string",
+                    description: "El nombre es obligatorio"
+                },
+                descripcion: {
+                    bsonType: "string"
+                },
+                // Validación de GeoJSON para coordenadas
+                ubicacion: {
+                    bsonType: "object",
+                    required: ["type", "coordinates"],
+                    properties: {
+                        type: {
+                            enum: ["Point"],
+                            description: "Debe ser de tipo Point"
+                        },
+                        coordinates: {
+                            bsonType: "array",
+                            minItems: 2,
+                            maxItems: 2,
+                            items: { bsonType: "double" },
+                            description: "Deben ser [longitud, latitud]"
+                        }
+                    }
+                },
+                // Validación de rango 1-5
+                dificultad: {
+                    bsonType: "int",
+                    minimum: 1,
+                    maximum: 5,
+                    description: "La dificultad debe ser un entero entre 1 y 5"
+                },
+                recomendaciones: {
+                    bsonType: "array",
+                    items: {
+                        bsonType: "object",
+                        required: ["nombre"],
+                        properties: {
+                            nombre: { bsonType: "string" },
+                            descuento: { bsonType: ["double", "int"] }
+                        }
+                    }
+                }
+            }
+        }
+    }
+});
+
+// Índice único para asegurar que no se repitan alias_destino
+db.Destino.createIndex({ "alias_destino": 1 }, { unique: true });
+
+// Índice geoespacial para búsquedas por cercanía
+db.Destino.createIndex({ "ubicacion": "2dsphere" });
+
 db.Destino.insertMany([
     {
         "alias_destino": "picos-europa",

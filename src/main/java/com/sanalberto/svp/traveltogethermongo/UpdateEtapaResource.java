@@ -18,8 +18,8 @@ public class UpdateEtapaResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    // todo: token needed?
-    // @JwtTokenNeeded
+    // todo: yep, token needed.
+    @JwtTokenNeeded
     public String updateEtapa(String jsonInput){
         String output = "";
 

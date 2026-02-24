@@ -1,6 +1,4 @@
 package com.sanalberto.svp.traveltogethermongo.repositories;
-import com.google.gson.Gson;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.sanalberto.svp.traveltogethermongo.database.Connection;
@@ -10,7 +8,6 @@ import org.bson.conversions.Bson;
 import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 
@@ -60,12 +57,13 @@ public class ViajesRepo {
         return output;
     }
 
-    public String updateEtapasViaje(int inputId, List<Etapa> etapasArrayList){
+    public String updateEtapasViaje(ObjectId inputId, List<Etapa> etapasArrayList){
         String output = "";
 
+        // todo: El ID tiene que ser recuperado con anterioridad.
         Bson bsonId = Filters.eq("_id", inputId);
         // todo: check
-        if (collection.updateMany(bsonId, (Bson) etapasArrayList).wasAcknowledged()){
+        if (collection.updateOne(bsonId, (Bson) etapasArrayList).wasAcknowledged()){
             output = "MONGO >> etapa con ID " + inputId + " actualizada correctamente.";
         }
         else{

@@ -6,10 +6,6 @@ import com.sanalberto.svp.traveltogethermongo.dto.ViajeDTO;
 import com.sanalberto.svp.traveltogethermongo.entities.Etapa;
 import com.sanalberto.svp.traveltogethermongo.entities.Viaje;
 import com.sanalberto.svp.traveltogethermongo.repositories.ViajesRepo;
-import org.bson.BsonDocument;
-import org.bson.BsonInt32;
-import org.bson.codecs.configuration.CodecRegistry;
-import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,8 +65,6 @@ public class ViajesServices {
 
         List<Etapa> etapasArrayList = inputNewEtapa.getUpdateEtapasArrayList();
 
-        // fixme: id needs to be a Bson
-        // fixed!
         viajesRepo.updateEtapasViaje(inputNewEtapa.getId(), etapasArrayList);
 
         return output;
