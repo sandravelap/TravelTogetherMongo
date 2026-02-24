@@ -185,7 +185,7 @@ db.Usuario.insertMany([
 ]);
 
 // 2. Colección de Destinos (Incluyendo sus recomendaciones anidadas)
-db.createCollection("destinos", {
+db.createCollection("Destino", {
     validator: {
         $jsonSchema: {
             bsonType: "object",
@@ -244,10 +244,10 @@ db.createCollection("destinos", {
 });
 
 // Índice único para asegurar que no se repitan alias_destino
-db.destinos.createIndex({ "alias_destino": 1 }, { unique: true });
+db.Destino.createIndex({ "alias_destino": 1 }, { unique: true });
 
 // Índice geoespacial para búsquedas por cercanía
-db.destinos.createIndex({ "ubicacion": "2dsphere" });
+db.Destino.createIndex({ "ubicacion": "2dsphere" });
 
 db.Destino.insertMany([
     {
