@@ -60,12 +60,12 @@ public class ViajesServices {
         return output;
     }
 
-    public String updateEtapas(UpdateEtapaDTO inputNewEtapa){
+    public String updateEtapas(String alias, UpdateEtapaDTO inputNewEtapa){
         String output = "";
 
         List<Etapa> etapasArrayList = inputNewEtapa.getUpdateEtapasArrayList();
 
-        viajesRepo.updateEtapasViaje(inputNewEtapa.getId(), etapasArrayList);
+        output = viajesRepo.updateEtapasViaje(alias, inputNewEtapa.getNameViaje(), etapasArrayList);
 
         return output;
     }

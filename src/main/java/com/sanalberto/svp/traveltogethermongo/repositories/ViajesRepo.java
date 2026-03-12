@@ -1,14 +1,18 @@
 package com.sanalberto.svp.traveltogethermongo.repositories;
+import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.sanalberto.svp.traveltogethermongo.database.Connection;
 import com.sanalberto.svp.traveltogethermongo.entities.Etapa;
 import com.sanalberto.svp.traveltogethermongo.entities.Viaje;
+import org.bson.Document;
 import org.bson.conversions.Bson;
-import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.mongodb.client.model.Filters.eq;
+import static com.mongodb.client.model.Updates.set;
 
 
 public class ViajesRepo {
@@ -32,7 +36,7 @@ public class ViajesRepo {
 
     // Consulta RA5: Buscar viajes que tengan una etapa en un destino específico
     public List<Viaje> buscarViajesPorDestino(int idDestinoBuscado) {
-        return collection.find(Filters.eq("etapas.idDestino", idDestinoBuscado))
+        return collection.find(eq("etapas.idDestino", idDestinoBuscado))
                 .into(new ArrayList<>());
     }
 
@@ -57,17 +61,24 @@ public class ViajesRepo {
         return output;
     }
 
-    public String updateEtapasViaje(ObjectId inputId, List<Etapa> etapasArrayList){
+    public String updateEtapasViaje(String aliasCreador, String inputViaje, List<Etapa> etapasArrayList){
         String output = "";
 
-        // todo: El ID tiene que ser recuperado con anterioridad.
-        Bson bsonId = Filters.eq("_id", inputId);
-        // todo: check
-        if (collection.updateOne(bsonId, (Bson) etapasArrayList).wasAcknowledged()){
-            output = "MONGO >> etapa con ID " + inputId + " actualizada correctamente.";
-        }
-        else{
-            output = "MONGO >> Ha habido un error al actualizar la tabla.";
+        // todo: cambiar a nombreViaje (String)
+        // done!
+        Bson nameViaje = eq("nombreViaje", inputViaje);
+
+        ArrayList<Viaje> aliasCreadorExistsArrayList = collection.find(Filters.regex("aliasCreador", aliasCreador)).into(new ArrayList<>());
+
+        // todo: comprobar que aliasCreador existe antes de ejecutar el update (recuperar el alias con una sentencia y un 'where').
+        // done lol!
+        if(!aliasCreadorExistsArrayList.isEmpty()){
+            if(collection.updateOne(nameViaje, (Bson) etapasArrayList).wasAcknowledged()){
+                output = "MONGO >> etapa con ID " + inputViaje + " actualizada correctamente.";
+            }
+            else{
+                output = "MONGO >> Ha habido un error al actualizar la tabla.";
+            }
         }
 
         return output;

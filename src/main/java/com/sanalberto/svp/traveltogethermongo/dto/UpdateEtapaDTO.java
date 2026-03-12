@@ -1,27 +1,26 @@
 package com.sanalberto.svp.traveltogethermongo.dto;
 
 import com.sanalberto.svp.traveltogethermongo.entities.Etapa;
-import org.bson.types.ObjectId;
 
 import java.util.ArrayList;
 
 public class UpdateEtapaDTO {
-    private ObjectId id;
+    private String nameViaje;
     private ArrayList<Etapa> updateEtapasArrayList;
 
     public UpdateEtapaDTO() {}
 
-    public UpdateEtapaDTO(ObjectId id, ArrayList<Etapa> updateEtapasArrayList) {
-        this.id = id;
+    public UpdateEtapaDTO(String nameViaje, ArrayList<Etapa> updateEtapasArrayList) {
+        this.nameViaje = nameViaje;
         this.updateEtapasArrayList = updateEtapasArrayList;
     }
 
-    public ObjectId getId() {
-        return id;
+    public String getNameViaje() {
+        return nameViaje;
     }
 
-    public void setId(ObjectId id) {
-        this.id = id;
+    public void setNameViaje(String nameViaje) {
+        this.nameViaje = nameViaje;
     }
 
     public ArrayList<Etapa> getUpdateEtapasArrayList() {
@@ -35,7 +34,7 @@ public class UpdateEtapaDTO {
     @Override
     public String toString() {
         return "UpdateEtapaDTO{" +
-            "id=" + id +
+            "id=" + nameViaje +
             ", updateEtapasArrayList=" + updateEtapasArrayList +
             '}';
     }

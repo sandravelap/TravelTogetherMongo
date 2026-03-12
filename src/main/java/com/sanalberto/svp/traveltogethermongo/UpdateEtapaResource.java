@@ -7,28 +7,29 @@ import jakarta.ws.rs.Consumes;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.Context;
 import jakarta.ws.rs.core.MediaType;
+import jakarta.ws.rs.core.SecurityContext;
 
 @Path("/updateEtapa")
 public class UpdateEtapaResource {
 
     private ViajesServices updateViajesServices = new ViajesServices();
 
-    // PUT o PATCH? (PUT -> modificaciones completas. PATCH -> modificaciones parciales)
+    // PUT -> modificaciones completas. PATCH -> modificaciones parciales
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
-    // todo: yep, token needed.
     @JwtTokenNeeded
-    public String updateEtapa(String jsonInput){
+    // todo: preparar para presentar a Sandra. ready!
+    public String updateEtapa(@Context SecurityContext securityContext, String jsonInput){
         String output = "";
+        String alias = securityContext.getUserPrincipal().getName();
 
         Gson gson = new Gson();
 
-        // todo: se puede combinar Mongo con Hibernate. Ver el POM para la dependencia y el enlace para más info.
-        // https://www.mongodb.com/es/docs/languages/java/mongodb-hibernate/current/get-started/
         UpdateEtapaDTO newEtapaDto = gson.fromJson(jsonInput, UpdateEtapaDTO.class);
-        output = updateViajesServices.updateEtapas(newEtapaDto);
+        output = updateViajesServices.updateEtapas(alias, newEtapaDto);
 
         return output;
     }
