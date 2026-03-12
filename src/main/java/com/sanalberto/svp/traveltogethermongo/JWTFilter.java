@@ -31,10 +31,10 @@ public class JWTFilter implements ContainerRequestFilter {
         // Buscamos si hay un token y retornamos si no existe
         String authHeader = requestContext.getHeaderString(HttpHeaders.AUTHORIZATION);
 
-        // MODO DESARROLLO: Si quieres saltarte el token en local
+        // MODO DESARROLLO: Si quieres saltarte el token en local, configurar en el recurso Authorization:dev-mode
         if ("dev-mode".equals(authHeader)) {
-            // Inyectamos un SecurityContext "fake" con un ID de prueba
-            setDummySecurityContext(requestContext, "usuario1");
+            // Inyectamos un SecurityContext "fake" con un alias de prueba
+            setDummySecurityContext(requestContext, "carlos_picos");
             return;
         }
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
