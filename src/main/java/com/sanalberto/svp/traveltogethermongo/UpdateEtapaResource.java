@@ -16,12 +16,10 @@ public class UpdateEtapaResource {
 
     private ViajesServices updateViajesServices = new ViajesServices();
 
-    // PUT -> modificaciones completas. PATCH -> modificaciones parciales
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @JwtTokenNeeded
-    // todo: preparar para presentar a Sandra. ready!
     public String updateEtapa(@Context SecurityContext securityContext, String jsonInput){
         String output = "";
         String alias = securityContext.getUserPrincipal().getName();
@@ -29,7 +27,9 @@ public class UpdateEtapaResource {
         Gson gson = new Gson();
 
         UpdateEtapaDTO newEtapaDto = gson.fromJson(jsonInput, UpdateEtapaDTO.class);
-        output = updateViajesServices.updateEtapas(alias, newEtapaDto);
+
+        // Al final se ha modificado el recurso para que actualice en la base de datos utilizando el nombre del viaje como referencia.
+        output = updateViajesServices.updateEtapas(alias, newEtapaDto.getNombreViaje(), newEtapaDto);
 
         return output;
     }

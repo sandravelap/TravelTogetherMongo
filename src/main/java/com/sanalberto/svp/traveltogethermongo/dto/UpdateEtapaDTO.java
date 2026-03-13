@@ -1,41 +1,38 @@
 package com.sanalberto.svp.traveltogethermongo.dto;
 
-import com.sanalberto.svp.traveltogethermongo.entities.Etapa;
-
 import java.util.ArrayList;
 
 public class UpdateEtapaDTO {
-    private String nameViaje;
-    private ArrayList<Etapa> updateEtapasArrayList;
+    private String nombreViaje;
+    private ArrayList<NewEtapaDTO> newEtapas;
 
     public UpdateEtapaDTO() {}
 
-    public UpdateEtapaDTO(String nameViaje, ArrayList<Etapa> updateEtapasArrayList) {
-        this.nameViaje = nameViaje;
-        this.updateEtapasArrayList = updateEtapasArrayList;
+    public UpdateEtapaDTO(String nombreViaje, ArrayList<NewEtapaDTO> newEtapas) {
+        this.nombreViaje = nombreViaje;
+        this.newEtapas = newEtapas;
     }
 
-    public String getNameViaje() {
-        return nameViaje;
+    public String getNombreViaje() {
+        return nombreViaje;
     }
 
-    public void setNameViaje(String nameViaje) {
-        this.nameViaje = nameViaje;
+    public void setNombreViaje(String nombreViaje) {
+        this.nombreViaje = nombreViaje;
     }
 
-    public ArrayList<Etapa> getUpdateEtapasArrayList() {
-        return updateEtapasArrayList;
+    public ArrayList<NewEtapaDTO> getNewEtapas() {
+        return newEtapas;
     }
 
-    public void setUpdateEtapasArrayList(ArrayList<Etapa> updateEtapasArrayList) {
-        this.updateEtapasArrayList = updateEtapasArrayList;
+    public void setNewEtapas(ArrayList<NewEtapaDTO> newEtapas) {
+        this.newEtapas = newEtapas;
     }
 
     @Override
     public String toString() {
         return "UpdateEtapaDTO{" +
-            "id=" + nameViaje +
-            ", updateEtapasArrayList=" + updateEtapasArrayList +
+            ", updateEtapasArrayList=" + newEtapas +
             '}';
     }
 }

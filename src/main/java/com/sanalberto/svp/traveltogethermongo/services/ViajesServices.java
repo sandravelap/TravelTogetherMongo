@@ -1,5 +1,6 @@
 package com.sanalberto.svp.traveltogethermongo.services;
 
+import com.sanalberto.svp.traveltogethermongo.dto.NewEtapaDTO;
 import com.sanalberto.svp.traveltogethermongo.dto.NewViajeDTO;
 import com.sanalberto.svp.traveltogethermongo.dto.UpdateEtapaDTO;
 import com.sanalberto.svp.traveltogethermongo.dto.ViajeDTO;
@@ -39,7 +40,6 @@ public class ViajesServices {
         // Se validan las mascotas para que concuerden con las opciones establecidas (todas, asistencia, no, null).
         if(mascotasOptions.contains(inputViajeDTO.getMascota().toUpperCase())){
 
-            // todo: get _id, etapas and participantes.
             // viajeDAO.set_id(10001);
             viajeDAO.setAliasCreador(alias);
             viajeDAO.setNombre(inputViajeDTO.getNombre());
@@ -60,12 +60,18 @@ public class ViajesServices {
         return output;
     }
 
-    public String updateEtapas(String alias, UpdateEtapaDTO inputNewEtapa){
+    public String updateEtapas(String alias, String nombreViaje, UpdateEtapaDTO inputNewEtapas){
         String output = "";
 
-        List<Etapa> etapasArrayList = inputNewEtapa.getUpdateEtapasArrayList();
+        ArrayList<NewEtapaDTO> etapasArrayList = inputNewEtapas.getNewEtapas();
 
-        output = viajesRepo.updateEtapasViaje(alias, inputNewEtapa.getNameViaje(), etapasArrayList);
+        List<Etapa> newEtapasDaoArrayList = new ArrayList<>();
+
+        for (NewEtapaDTO newEtapaDTO: etapasArrayList){
+            newEtapasDaoArrayList.add(new Etapa(newEtapaDTO.getAliasDestino(), newEtapaDTO.getNombreDestino(), newEtapaDTO.getHoraInicio(), newEtapaDTO.getDuracionMinutos()));
+        }
+
+        output = viajesRepo.updateEtapasViaje(alias, nombreViaje, newEtapasDaoArrayList);
 
         return output;
     }

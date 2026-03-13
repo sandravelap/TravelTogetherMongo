@@ -1,11 +1,10 @@
 package com.sanalberto.svp.traveltogethermongo.repositories;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import com.sanalberto.svp.traveltogethermongo.database.Connection;
+import com.sanalberto.svp.traveltogethermongo.dto.NewEtapaDTO;
 import com.sanalberto.svp.traveltogethermongo.entities.Etapa;
 import com.sanalberto.svp.traveltogethermongo.entities.Viaje;
-import org.bson.Document;
 import org.bson.conversions.Bson;
 
 import java.util.ArrayList;
@@ -16,7 +15,8 @@ import static com.mongodb.client.model.Updates.set;
 
 
 public class ViajesRepo {
-    private final MongoCollection<Viaje> collection; // <--- Atributo de la clase
+    // Aributo de la clase.
+    private final MongoCollection<Viaje> collection;
 
     public ViajesRepo() {
         // "this.collection" se refiere al atributo de arriba
@@ -61,20 +61,17 @@ public class ViajesRepo {
         return output;
     }
 
-    public String updateEtapasViaje(String aliasCreador, String inputViaje, List<Etapa> etapasArrayList){
+    public String updateEtapasViaje(String aliasCreador, String inputNombre, List<Etapa> etapasArrayList){
         String output = "";
 
-        // todo: cambiar a nombreViaje (String)
-        // done!
-        Bson nameViaje = eq("nombreViaje", inputViaje);
+        Bson nameViaje = eq("nombre", inputNombre);
 
         ArrayList<Viaje> aliasCreadorExistsArrayList = collection.find(Filters.regex("aliasCreador", aliasCreador)).into(new ArrayList<>());
 
-        // todo: comprobar que aliasCreador existe antes de ejecutar el update (recuperar el alias con una sentencia y un 'where').
-        // done lol!
         if(!aliasCreadorExistsArrayList.isEmpty()){
-            if(collection.updateOne(nameViaje, (Bson) etapasArrayList).wasAcknowledged()){
-                output = "MONGO >> etapa con ID " + inputViaje + " actualizada correctamente.";
+
+            if(collection.updateOne(nameViaje, set("etapas", etapasArrayList)).wasAcknowledged()){
+                output = "MONGO >> etapa del viaje con nombre " + inputNombre + " actualizada correctamente.";
             }
             else{
                 output = "MONGO >> Ha habido un error al actualizar la tabla.";

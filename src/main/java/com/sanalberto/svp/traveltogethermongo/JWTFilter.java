@@ -33,7 +33,7 @@ public class JWTFilter implements ContainerRequestFilter {
         // MODO DESARROLLO: Si quieres saltarte el token en local
         if ("dev-mode".equals(authHeader)) {
             // Inyectamos un SecurityContext "fake" con un ID de prueba
-            setDummySecurityContext(requestContext, "usuario1");
+            setDummySecurityContext(requestContext, "carlos_picos");
             return;
         }
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
