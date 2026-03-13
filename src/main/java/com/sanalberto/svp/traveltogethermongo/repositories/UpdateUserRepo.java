@@ -6,6 +6,8 @@ import com.mongodb.client.model.Updates;
 import com.sanalberto.svp.traveltogethermongo.database.Connection;
 import com.sanalberto.svp.traveltogethermongo.dto.UpdateUserDTO;
 import com.sanalberto.svp.traveltogethermongo.entities.Usuario;
+import org.bson.conversions.Bson;
+
 
 public class UpdateUserRepo {
     private final MongoCollection<Usuario> collection;
@@ -27,7 +29,7 @@ public class UpdateUserRepo {
                     Updates.set("tabaco", updateUserDTO.getTabaco()),
                     Updates.set("mascota", updateUserDTO.getMascota()));
             // Si se ha podido actualizar devolvemos true.
-            if (collection.updateOne(filterViajeByName, update).wasAcknowledged()) {
+            if (collection.updateOne(filterUserByAlias, update).wasAcknowledged()) {
                 updated = true;
             }
         }

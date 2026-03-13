@@ -2,11 +2,10 @@ package com.sanalberto.svp.traveltogethermongo.repositories;
 
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.sanalberto.svp.traveltogethermongo.database.Connection;
 import com.sanalberto.svp.traveltogethermongo.dto.CercanosDTO;
 import com.sanalberto.svp.traveltogethermongo.entities.Destino;
 import org.bson.Document;
-
+import com.sanalberto.svp.traveltogethermongo.database.Connection;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

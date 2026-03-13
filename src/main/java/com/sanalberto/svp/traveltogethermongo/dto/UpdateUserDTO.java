@@ -25,10 +25,10 @@ public class UpdateUserDTO {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    public void getAlias() {
+    public String getAlias() {
         return alias;
     }
-    public String setAlias(String alias) {
+    public void setAlias(String alias) {
         this.alias = alias;
     }
 
