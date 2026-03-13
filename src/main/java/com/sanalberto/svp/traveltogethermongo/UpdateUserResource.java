@@ -26,8 +26,10 @@ public class UpdateUserResource {
     @Produces(MediaType.APPLICATION_JSON)
     @JwtTokenNeeded
     public Response insert (UpdateUserDTO updateUserDTO, @Context SecurityContext securityContext) {
+        // Recuperamos el alias del token y lo seteamos en el DTO.
         String alias = securityContext.getUserPrincipal().getName();
-        String respuesta = updateUserServices.update(updateUserDTO, alias);
+        updateUserDTO.setAlias(alias);
+        String respuesta = updateUserServices.update(updateUserDTO);
         return Response.ok(Map.of("respuesta", respuesta)).build();
     }
 }

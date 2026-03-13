@@ -2,6 +2,7 @@ package com.sanalberto.svp.traveltogethermongo.dto;
 
 public class UpdateUserDTO {
     String nombre;
+    String alias;
     String correo;
     String tabaco;
     String mascota;
@@ -9,8 +10,9 @@ public class UpdateUserDTO {
     public UpdateUserDTO() {
     }
 
-    public UpdateUserDTO(String nombre, String correo, String tabaco, String mascota) {
+    public UpdateUserDTO(String nombre, String alias, String correo, String tabaco, String mascota) {
         this.nombre = nombre;
+        this.alias = alias;
         this.correo = correo;
         this.tabaco = tabaco;
         this.mascota = mascota;
@@ -22,6 +24,12 @@ public class UpdateUserDTO {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    public void getAlias() {
+        return alias;
+    }
+    public String setAlias(String alias) {
+        this.alias = alias;
     }
 
     public String getCorreo() {
