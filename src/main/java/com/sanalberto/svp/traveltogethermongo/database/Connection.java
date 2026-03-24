@@ -15,7 +15,7 @@ public class Connection {
     private static MongoClient mongoClient;
     private static MongoDatabase database;
 
-    // Se usan las variables de entorno de tu docker-compose.
+    // Se usan las variables de entorno del docker-compose.
     private static final String HOST = System.getenv().getOrDefault("MONGO_HOST", "localhost");
     private static final String PORT = System.getenv().getOrDefault("MONGO_PORT", "27018");
     private static final String DB_NAME = System.getenv().getOrDefault("MONGO_DATABASE", "traveltogether");

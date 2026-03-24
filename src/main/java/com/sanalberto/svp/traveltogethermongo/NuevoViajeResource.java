@@ -25,7 +25,7 @@ public class NuevoViajeResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.TEXT_PLAIN)
     @JwtTokenNeeded
-    public String guardarNuevoViaje(@Context SecurityContext securityContext, String jsonInput){
+    public String saveNuevoViaje(@Context SecurityContext securityContext, String jsonInput){
         String output = "";
         String alias = securityContext.getUserPrincipal().getName();
 

@@ -168,7 +168,7 @@ Recurso que recupera los datos de los viajes organizados por el usuario
 
 + Request
 
-    +Headers:
+    + Headers:
 
         Authorization: Bearer {token}
 
@@ -189,3 +189,46 @@ Recurso que recupera los datos de los viajes organizados por el usuario
 + Response 503 (text/plain)
 
         "Error al conectar a la base de datos"
+
+# Recurso UpdateEtapaResource (/updateEtapa)
+
+Recurso que actualiza las etapas de un viaje a partir de un ID dado.
+
+## Actualizar las etapas de un viaje [PUT]
+
++ Request (application/json)
+
+    + Body
+
+        {
+            "nameViaje": "viaje-01",
+            "newEtapas": [
+                {
+                    "aliasDestino": "bodegas-haro",
+                    "nombreDestino": "Bodegas Haro",
+                    "horaInicio": "11:30",
+                    "duracionMinutos": 150
+                },
+                {
+                    "aliasDestino": "bodegas-haro-2",
+                    "nombreDestino": "Bodegas Haro, segundo almacén",
+                    "horaInicio": "14:00",
+                    "duracionMinutos": 100
+                }
+            ]
+        }
+
++ Parameters
+    + id: `00001` (number, required)
+        ID del viaje cuyas etapas se van a actualizar.
+
+    + newEtapas: `Arraylist` (Arraylist, required)
+        Datos con los que se va a actualizar las etapas del viaje.
+
++ Response 200 (text/plain)
+
+    Etapas del viaje (nombre viaje?) actualizadas exitosamente.
+
++ Response 503
+
+    Error: No se ha podido actualizar las etapas. Abortando...

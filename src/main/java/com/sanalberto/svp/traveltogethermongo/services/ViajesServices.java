@@ -1,11 +1,13 @@
 package com.sanalberto.svp.traveltogethermongo.services;
 
+import com.sanalberto.svp.traveltogethermongo.dto.NewEtapaDTO;
 import com.sanalberto.svp.traveltogethermongo.dto.NewViajeDTO;
+import com.sanalberto.svp.traveltogethermongo.dto.UpdateEtapaDTO;
 import com.sanalberto.svp.traveltogethermongo.dto.ViajeDTO;
+import com.sanalberto.svp.traveltogethermongo.entities.Etapa;
 import com.sanalberto.svp.traveltogethermongo.entities.Viaje;
 import com.sanalberto.svp.traveltogethermongo.repositories.ViajesRepo;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,7 +40,6 @@ public class ViajesServices {
         // Se validan las mascotas para que concuerden con las opciones establecidas (todas, asistencia, no, null).
         if(mascotasOptions.contains(inputViajeDTO.getMascota().toUpperCase())){
 
-            // todo: get _id, etapas and participantes.
             // viajeDAO.set_id(10001);
             viajeDAO.setAliasCreador(alias);
             viajeDAO.setNombre(inputViajeDTO.getNombre());
@@ -55,6 +56,22 @@ public class ViajesServices {
         else{
             output = "MONGO >> No se ha podido guardar el nuevo viaje, el campo mascotas debe ser \"TODAS\", \"ASISTENCIA\" o \"NO\".";
         }
+
+        return output;
+    }
+
+    public String updateEtapas(String alias, String nombreViaje, UpdateEtapaDTO inputNewEtapas){
+        String output = "";
+
+        ArrayList<NewEtapaDTO> etapasArrayList = inputNewEtapas.getNewEtapas();
+
+        List<Etapa> newEtapasDaoArrayList = new ArrayList<>();
+
+        for (NewEtapaDTO newEtapaDTO: etapasArrayList){
+            newEtapasDaoArrayList.add(new Etapa(newEtapaDTO.getAliasDestino(), newEtapaDTO.getNombreDestino(), newEtapaDTO.getHoraInicio(), newEtapaDTO.getDuracionMinutos()));
+        }
+
+        output = viajesRepo.updateEtapasViaje(alias, nombreViaje, newEtapasDaoArrayList);
 
         return output;
     }
